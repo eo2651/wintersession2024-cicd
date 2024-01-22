@@ -1,20 +1,22 @@
 name: Our CI
 
-on: 
-  pull_request: 
+on:
+  pull_request:
   push:
-    - main
-    - other-branch
-  workflow_dispatch: # adds button to click to run manually
+    branches:
+      - main
+      - other-branch
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    steps: 
-      - run: echo "hello world"
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      -name: Install Python Module
-        run: python -m pip install .[]
+      - name: Install Python package
+        run: python -m pip install .[test]
+      - name: Run tests
+        run: python -m pytest

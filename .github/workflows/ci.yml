@@ -1,0 +1,13 @@
+name: Our CI
+on: 
+  pull_request: 
+  push:
+    - main
+    - other-branch
+  workflow_dispatch: # adds button to click to run manually
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    step: 
+      - run: echo "hello world"
